@@ -5,6 +5,7 @@ Terraform workflow to be reused in your project.
 * https://github.com/marketplace/actions/hashicorp-setup-terraform
 * https://github.com/marketplace/actions/run-tfsec-pr-commenter
 
+**Disclaimer:** The tfsec commenter will run ONLY in pull requests
 
 ## Inputs
 * `tf_version`: Terraform version (type: string, default: 1.0.0)]
