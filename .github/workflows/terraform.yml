@@ -7,11 +7,6 @@ on:
         default: '1.0.0'
         required: false
         type: string
-      tf_wrapper:
-        description: 'If will use Terraform wrapper'
-        default: false
-        required: false
-        type: boolean
 
 jobs:
   job_terraform:
@@ -25,7 +20,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: {{ inputs.tf_version }}
-          terraform_wrapper: {{ inputs.tf_wrapper }}
+          terraform_wrapper: false
 
       - name: Terraform format
         id: fmt
