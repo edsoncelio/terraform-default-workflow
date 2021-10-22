@@ -22,8 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+      - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: {{ inputs.tf_version }}
           terraform_wrapper: {{ inputs.tf_wrapper }}
