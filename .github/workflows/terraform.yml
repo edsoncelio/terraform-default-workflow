@@ -28,7 +28,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: ${{ inputs.tf_version }}
-          terraform_wrapper: false
+          terraform_wrapper: ${{ inputs.tf_wrapper }}
 
 
       - name: Terraform format
