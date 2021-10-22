@@ -1,9 +1,11 @@
 # terraform-default-workflow
 Terraform workflow to be reused in your project.
 
-## Inputs
+## Resources
 TODO
 
+## Inputs
+TODO
 
 ## Usage
 TODO

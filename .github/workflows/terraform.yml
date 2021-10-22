@@ -1,0 +1,51 @@
+name: Terraform workflow
+on:
+  workflow_call:
+    inputs:
+      machine_version:
+        description: 'Machine version to run the pipeline'
+        default: 'ubuntu-18.04'
+        required: false
+        type: string
+      tf_version:
+        description: 'Terraform version'
+        default: '1.0.0'
+        required: false
+        type: string
+      tf_wrapper:
+        description: 'If will use Terraform wrapper'
+        default: false
+        required: false
+        type: boolean
+
+jobs:
+  job_terraform:
+    name: Terraform pipeline
+    runs-on: {{ inputs.machine_version }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: {{ inputs.tf_version }}
+          terraform_wrapper: {{ inputs.tf_wrapper }}
+
+      - name: Terraform format
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Terraform init
+        id: init
+        run: terraform init
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate -no-color
+      
+      - name: TFSec validation
+        uses: aquasecurity/tfsec-pr-commenter-action@v0.1.10
+        with:
+          github_token: ${{ github.token }}
