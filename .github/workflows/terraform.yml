@@ -12,6 +12,9 @@ on:
         default: false
         required: false
         type: boolean
+    secrets:
+      token:
+        required: true
 
 jobs:
   job_terraform:
@@ -41,4 +44,4 @@ jobs:
       - name: TFSec validation
         uses: aquasecurity/tfsec-pr-commenter-action@v0.1.10
         with:
-          github_token: ${{ github.token }}
+          github_token: ${{ inputs.token }}
