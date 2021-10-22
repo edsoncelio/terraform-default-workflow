@@ -12,8 +12,8 @@ on:
         default: false
         required: false
         type: boolean
-    secrets:
       token:
+        description: "github token"
         required: true
 
 jobs:
