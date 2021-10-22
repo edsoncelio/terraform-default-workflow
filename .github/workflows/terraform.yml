@@ -42,6 +42,6 @@ jobs:
         run: terraform validate -no-color
       
       - name: TFSec validation
-        uses: aquasecurity/tfsec-pr-commenter-action@v0.1.10
+        uses: aquasecurity/tfsec-pr-commenter-action@main
         with:
           github_token: ${{ secrets.token }}
