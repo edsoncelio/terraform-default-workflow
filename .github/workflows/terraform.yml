@@ -30,7 +30,6 @@ jobs:
           terraform_version: ${{ inputs.tf_version }}
           terraform_wrapper: ${{ inputs.tf_wrapper }}
 
-
       - name: Terraform format
         id: fmt
         run: terraform fmt -check
@@ -44,6 +43,7 @@ jobs:
         run: terraform validate -no-color
       
       - name: TFSec validation
+        if: ${{ github.event.pull_request.base.ref == 'main' }}
         uses: aquasecurity/tfsec-pr-commenter-action@main
         with:
           github_token: ${{ secrets.token }}
