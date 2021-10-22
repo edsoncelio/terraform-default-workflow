@@ -8,7 +8,6 @@ Terraform workflow to be reused in your project.
 
 ## Inputs
 * `tf_version`: Terraform version (type: string, default: 1.0.0)]
-* `machine_version`: Machine version to run the pipeline (type: string, default: `ubuntu-18.04`)
 * `tf_wrapper`: If will use the Terraform wrapper (type: boolean, default: `false`)
 
 ## Usage

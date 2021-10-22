@@ -2,9 +2,6 @@ name: Terraform workflow
 on:
   workflow_call:
     inputs:
-      machine_version:
-        description: 'Machine version to run the pipeline'
-        default: 'ubuntu-18.04'
         required: false
         type: string
       tf_version:
@@ -21,7 +18,7 @@ on:
 jobs:
   job_terraform:
     name: Terraform pipeline
-    runs-on: {{ inputs.machine_version }}
+    runs-on: ubuntu-18.04
     
     steps:
       - name: Checkout
