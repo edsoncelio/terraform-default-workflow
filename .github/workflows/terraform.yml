@@ -2,8 +2,6 @@ name: Terraform workflow
 on:
   workflow_call:
     inputs:
-        required: false
-        type: string
       tf_version:
         description: 'Terraform version'
         default: '1.0.0'
