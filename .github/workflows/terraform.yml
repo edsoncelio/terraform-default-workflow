@@ -18,7 +18,7 @@ on:
 
 jobs:
   job_terraform:
-    name: Terraform pipeline
+    name: Terraform core workflow
     runs-on: ubuntu-18.04
     
     steps:
@@ -41,6 +41,20 @@ jobs:
       - name: Terraform validate
         id: validate
         run: terraform validate -no-color
+      
+      - name: TFSec validation
+        if: ${{ github.event.pull_request.base.ref == 'main' }}
+        uses: aquasecurity/tfsec-pr-commenter-action@main
+        with:
+          github_token: ${{ secrets.token }}
+          
+  job_checkov:
+    name: Checkov workflow
+    runs-on: ubuntu-18.04
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       
       - name: TFSec validation
         if: ${{ github.event.pull_request.base.ref == 'main' }}
