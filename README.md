@@ -36,7 +36,7 @@ jobs:
 ```
 
 ## Contributing
-TODO
+Just open a PR or issue :D
 
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
