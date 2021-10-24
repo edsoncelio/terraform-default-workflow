@@ -27,6 +27,16 @@ on:
         default: 'terraform validate -no-color'
         required: false
         type: string
+      tf_command_plan:
+        description: 'Terraform plan command'
+        default: 'terraform plan -no-color'
+        required: false
+        type: string
+      tf_command_apply:
+        description: 'Terraform apply command'
+        default: 'terraform apply -auto-approve -no-color'
+        required: false
+        type: string
       command_wrk_dir:
         description: 'Working dir'
         default: './'
@@ -34,6 +44,11 @@ on:
         type: string
       command_continue_on_error:
         description: 'If will continue on error'
+        default: false
+        required: false
+        type: boolean
+      enable_plan_apply:
+        description: 'If will enable plan and apply'
         default: false
         required: false
         type: boolean
@@ -70,7 +85,19 @@ jobs:
         id: validate
         run: ${{ inputs.tf_command_validate }}
         working-directory: ${{ inputs.command_wrk_dir }}
-            
+
+      - name: Terraform plan
+        if: ${{ inputs.enable_plan_apply }}
+        id: plan
+        run: ${{ inputs.tf_command_plan }}
+        working-directory: ${{ inputs.command_wrk_dir }}
+
+        - name: Terraform apply
+        if: ${{ inputs.enable_plan_apply }}
+        id: apply
+        run: ${{ inputs.tf_command_apply }}
+        working-directory: ${{ inputs.command_wrk_dir }}   
+
   jobs_tfsec:
     needs: jobs_terraform
     name: Checkov workflow
