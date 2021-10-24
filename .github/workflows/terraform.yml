@@ -92,7 +92,7 @@ jobs:
         run: ${{ inputs.tf_command_plan }}
         working-directory: ${{ inputs.command_wrk_dir }}
 
-        - name: Terraform apply
+      - name: Terraform apply
         if: ${{ inputs.enable_plan_apply }}
         id: apply
         run: ${{ inputs.tf_command_apply }}
