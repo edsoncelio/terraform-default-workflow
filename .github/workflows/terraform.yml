@@ -70,13 +70,8 @@ jobs:
         id: validate
         run: ${{ inputs.tf_command_validate }}
         working-directory: ${{ inputs.command_wrk_dir }}
-        
-      - name: Terraform plan
-        id: plan
-        run: ${{ inputs.tf_command_plan }}
-        working-directory: ${{ inputs.command_wrk_dir }}
             
-  jobs_checkov:
+  jobs_tfsec:
     needs: jobs_terraform
     name: Checkov workflow
     if: github.event_name == 'pull_request'
