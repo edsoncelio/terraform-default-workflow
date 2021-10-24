@@ -80,6 +80,7 @@ jobs:
     name: Checkov workflow
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-18.04
+    continue-on-error: ${{ inputs.command_continue_on_error }}
     
     steps:
       - name: Checkout

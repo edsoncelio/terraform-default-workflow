@@ -10,6 +10,7 @@ Terraform workflow to be reused in your project.
 ## Inputs
 
 * `command_wrk_dir`: Working dir (optional, type: string, default: `'./'`)
+* `command_continue_on_error`: If a job will continue on error (optional, type: boolean, default: `false`)
 * `tf_version`: Terraform version (optional, type: string, default: `1.0.0`)
 * `tf_wrapper`: If will use the Terraform wrapper (toptional, ype: boolean, default: `false`)
 * `token`: Github secret token, available by default (type: secret, required)
@@ -18,7 +19,7 @@ If you want override the defaults Terraform commands, you can use:
 * `tf_command_fmt`: Terraform fmt command (optional, type: string, default: `'terraform fmt -check'`)
 * `tf_command_init`: Terraform init command (optional, type: string, default: `'terraform init'`)
 * `tf_command_validate`: Terraform validate command (optional, type: string, default: `'terraform validate -no-color'`)
-* `tf_command_plan`: Terraform plan command (optional, type: string, default: `'terraform plan -no-color'`)
+
 
 
 ## Usage
