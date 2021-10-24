@@ -12,14 +12,40 @@ on:
         default: false
         required: false
         type: boolean
+      tf_command_fmt:
+        description: 'Terraform fmt command'
+        default: 'terraform fmt -check'
+        required: false
+        type: string
+      tf_command_init:
+        description: 'Terraform init command'
+        default: 'terraform init'
+        required: false
+        type: string
+      tf_command_validate:
+        description: 'Terraform validate command'
+        default: 'terraform validate -no-color'
+        required: false
+        type: string
+      command_wrk_dir:
+        description: 'Working dir'
+        default: './'
+        required: false
+        type: string
+      command_continue_on_error:
+        description: 'If will continue on error'
+        default: false
+        required: false
+        type: boolean
     secrets:
       token:
         required: true
 
 jobs:
-  job_terraform:
-    name: Terraform pipeline
+  jobs_terraform:
+    name: Terraform core workflow
     runs-on: ubuntu-18.04
+    continue-on-error: ${{ inputs.command_continue_on_error }}
     
     steps:
       - name: Checkout
@@ -32,18 +58,36 @@ jobs:
 
       - name: Terraform format
         id: fmt
-        run: terraform fmt -check
+        run: ${{ inputs.tf_command_fmt }}
+        working-directory: ${{ inputs.command_wrk_dir }}
 
       - name: Terraform init
         id: init
-        run: terraform init
+        run: ${{ inputs.tf_command_init }}
+        working-directory: ${{ inputs.command_wrk_dir }}
 
       - name: Terraform validate
         id: validate
-        run: terraform validate -no-color
+        run: ${{ inputs.tf_command_validate }}
+        working-directory: ${{ inputs.command_wrk_dir }}
+        
+      - name: Terraform plan
+        id: plan
+        run: ${{ inputs.tf_command_plan }}
+        working-directory: ${{ inputs.command_wrk_dir }}
+            
+  jobs_checkov:
+    needs: jobs_terraform
+    name: Checkov workflow
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-18.04
+    continue-on-error: ${{ inputs.command_continue_on_error }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       
       - name: TFSec validation
-        if: ${{ github.event.pull_request.base.ref == 'main' }}
         uses: aquasecurity/tfsec-pr-commenter-action@main
         with:
           github_token: ${{ secrets.token }}
