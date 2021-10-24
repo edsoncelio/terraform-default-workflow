@@ -56,7 +56,7 @@ jobs:
 
       - name: Terraform init
         id: init
-        run: terraform init
+        run: ${{ inputs.tf_command_init }}
 
       - name: Terraform validate
         id: validate
