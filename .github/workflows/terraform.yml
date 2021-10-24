@@ -27,11 +27,6 @@ on:
         default: 'terraform validate -no-color'
         required: false
         type: string
-      tf_command_plan:
-        description: 'Terraform plan command'
-        default: 'terraform plan -no-color'
-        required: false
-        type: string
       command_wrk_dir:
         description: 'Working dir'
         default: './'
@@ -63,7 +58,7 @@ jobs:
       - name: Terraform format
         id: fmt
         run: ${{ inputs.tf_command_fmt }}
-        continue-on-error: true
+        continue-on-error: ${{ inputs.command_continue_error }}
         working-directory: ${{ inputs.command_wrk_dir }}
 
       - name: Terraform init
