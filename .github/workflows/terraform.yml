@@ -37,7 +37,7 @@ on:
         default: './'
         required: false
         type: string
-      continue_error:
+      command_continue_error:
         description: 'Continue on error'
         default: true
         required: false
@@ -64,25 +64,25 @@ jobs:
         id: fmt
         run: ${{ inputs.tf_command_fmt }}
         working-directory: ${{ inputs.command_wrk_dir }}
-        continue-on-error: ${{ inputs.continue_error }}
+        continue-on-error: ${{ inputs.command_continue_error }}
 
       - name: Terraform init
         id: init
         run: ${{ inputs.tf_command_init }}
         working-directory: ${{ inputs.command_wrk_dir }}
-        continue-on-error: ${{ inputs.continue_error }}
+        continue-on-error: ${{ inputs.command_continue_error }}
 
       - name: Terraform validate
         id: validate
         run: ${{ inputs.tf_command_validate }}
         working-directory: ${{ inputs.command_wrk_dir }}
-        continue-on-error: ${{ inputs.continue_error }}
+        continue-on-error: ${{ inputs.command_continue_error }}
         
       - name: Terraform plan
         id: plan
         run: ${{ inputs.tf_command_plan }}
         working-directory: ${{ inputs.command_wrk_dir }}
-        continue-on-error: ${{ inputs.continue_error }}
+        continue-on-error: ${{ inputs.command_continue_error }}
             
   jobs_checkov:
     name: Checkov workflow
