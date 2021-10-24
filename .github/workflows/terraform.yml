@@ -12,12 +12,32 @@ on:
         default: false
         required: false
         type: boolean
+      tf_command_fmt:
+        description: 'Terraform fmt command'
+        default: 'terraform fmt -check'
+        required: false
+        type: string
+      tf_command_init:
+        description: 'Terraform init command'
+        default: 'terraform init'
+        required: false
+        type: string
+      tf_command_validate:
+        description: 'Terraform validate command'
+        default: 'terraform validate -no-color'
+        required: false
+        type: string
+      tf_command_plan:
+        description: 'Terraform plan command'
+        default: 'terraform plan -no-color'
+        required: false
+        type: string
     secrets:
       token:
         required: true
 
 jobs:
-  job_terraform:
+  jobs_terraform:
     name: Terraform core workflow
     runs-on: ubuntu-18.04
     
@@ -41,14 +61,8 @@ jobs:
       - name: Terraform validate
         id: validate
         run: terraform validate -no-color
-      
-      - name: TFSec validation
-        if: ${{ github.event.pull_request.base.ref == 'main' }}
-        uses: aquasecurity/tfsec-pr-commenter-action@main
-        with:
-          github_token: ${{ secrets.token }}
-          
-  job_checkov:
+            
+  jobs_checkov:
     name: Checkov workflow
     runs-on: ubuntu-18.04
     
@@ -57,7 +71,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: TFSec validation
-        if: ${{ github.event.pull_request.base.ref == 'main' }}
+        if: github.event_name == 'pull_request'
         uses: aquasecurity/tfsec-pr-commenter-action@main
         with:
           github_token: ${{ secrets.token }}
