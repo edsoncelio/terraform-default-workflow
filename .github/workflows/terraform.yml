@@ -32,8 +32,8 @@ on:
         default: './'
         required: false
         type: string
-      command_continue_error:
-        description: 'Continue on error'
+      command_continue_on_error:
+        description: 'If will continue on error'
         default: true
         required: false
         type: boolean
@@ -58,7 +58,7 @@ jobs:
       - name: Terraform format
         id: fmt
         run: ${{ inputs.tf_command_fmt }}
-        continue-on-error: ${{ inputs.command_continue_error }}
+        continue-on-error: ${{ inputs.command_continue_on_error }}
         working-directory: ${{ inputs.command_wrk_dir }}
 
       - name: Terraform init
