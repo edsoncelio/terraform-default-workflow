@@ -34,7 +34,7 @@ on:
         type: string
       command_continue_on_error:
         description: 'If will continue on error'
-        default: true
+        default: false
         required: false
         type: boolean
     secrets:
@@ -77,6 +77,7 @@ jobs:
         working-directory: ${{ inputs.command_wrk_dir }}
             
   jobs_checkov:
+    needs: jobs_terraform
     name: Checkov workflow
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-18.04
