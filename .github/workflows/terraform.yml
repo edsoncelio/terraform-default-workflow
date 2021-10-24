@@ -45,6 +45,7 @@ jobs:
   jobs_terraform:
     name: Terraform core workflow
     runs-on: ubuntu-18.04
+    continue-on-error: ${{ inputs.command_continue_on_error }}
     
     steps:
       - name: Checkout
@@ -58,7 +59,6 @@ jobs:
       - name: Terraform format
         id: fmt
         run: ${{ inputs.tf_command_fmt }}
-        continue-on-error: ${{ inputs.command_continue_on_error }}
         working-directory: ${{ inputs.command_wrk_dir }}
 
       - name: Terraform init
