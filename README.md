@@ -1,5 +1,5 @@
 # terraform-default-workflow
-Terraform workflow to be reused in your project, with commom Terraform steps and static analysis with [checkov](https://github.com/bridgecrewio/checkov).
+Terraform workflow to be reused in your project, with commom Terraform steps and static analysis with [tfsec](https://github.com/aquasecurity/tfsec).
 
 ## Actions
 * https://github.com/marketplace/actions/hashicorp-setup-terraform
@@ -19,7 +19,7 @@ A job triggered at all `push` events with the steps:
 * Run Terraform init
 * Run Terraform validate
 
-### `jobs_checkov`
+### `jobs_tfsec`
 A job triggered at all `pull_request` events with the steps:
 * checkout the code
 * setup checkcov
