@@ -1,11 +1,31 @@
 # terraform-default-workflow
-Terraform workflow to be reused in your project.
+Terraform workflow to be reused in your project, with commom Terraform steps and static analysis with [checkov](https://github.com/bridgecrewio/checkov).
 
 ## Actions
 * https://github.com/marketplace/actions/hashicorp-setup-terraform
 * https://github.com/marketplace/actions/run-tfsec-pr-commenter
 
-**Disclaimer:** The tfsec commenter job will run ONLY in pull requests
+
+
+## How it works
+
+This workflow will setup a CI with the following jobs (and steps):
+
+### `jobs_teraform`
+A job triggered at all `push` events with the steps:
+* checkout the code
+* setup Terraform
+* Run Terraform fmt
+* Run Terraform init
+* Run Terraform validate
+
+### `jobs_checkov`
+A job triggered at all `pull_request` events with the steps:
+* checkout the code
+* setup checkcov
+* run checkcov static analysis
+* If a vulnerability is found, create a comment in PR
+
 
 ## Inputs
 
@@ -35,6 +55,19 @@ jobs:
     secrets:
         token: ${{ secrets.GITHUB_TOKEN }}
 ```
+And with customized inputs:
+```
+...
+
+jobs:
+  my-terraform-workflow:
+    uses: edsoncelio/terraform-default-workflow/.github/workflows/terraform.yml@v1
+    with:
+        command_wrk_dir: './infra-code-dir'
+    secrets:
+        token: ${{ secrets.GITHUB_TOKEN }}
+```
+
 
 ## Contributing
 Just open a PR or issue :D
