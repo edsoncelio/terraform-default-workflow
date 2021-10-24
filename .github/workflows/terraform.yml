@@ -63,8 +63,8 @@ jobs:
       - name: Terraform format
         id: fmt
         run: ${{ inputs.tf_command_fmt }}
-        working-directory: ${{ inputs.command_wrk_dir }}
         continue-on-error: true
+        working-directory: ${{ inputs.command_wrk_dir }}
 
       - name: Terraform init
         id: init
