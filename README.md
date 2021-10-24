@@ -22,7 +22,7 @@ A job triggered at all `push` events with the steps:
 ### `jobs_tfsec`
 A job triggered at all `pull_request` events with the steps:
 * checkout the code
-* setup checkcov
+* setup tfsec
 * run checkcov static analysis
 * If a vulnerability is found, create a comment in PR
 
@@ -51,7 +51,7 @@ Calling the workflow with all the default inputs:
 
 jobs:
   my-terraform-workflow:
-    uses: edsoncelio/terraform-default-workflow/.github/workflows/terraform.yml@v1
+    uses: edsoncelio/terraform-default-workflow/.github/workflows/terraform.yml@v2
     secrets:
         token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -61,7 +61,7 @@ And with customized inputs:
 
 jobs:
   my-terraform-workflow:
-    uses: edsoncelio/terraform-default-workflow/.github/workflows/terraform.yml@v1
+    uses: edsoncelio/terraform-default-workflow/.github/workflows/terraform.yml@v2
     with:
         command_wrk_dir: './infra-code-dir'
     secrets:
