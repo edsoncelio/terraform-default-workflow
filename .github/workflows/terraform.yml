@@ -69,6 +69,11 @@ jobs:
         id: validate
         run: ${{ inputs.tf_command_validate }}
         working-directory: ${{ inputs.command_wrk_dir }}
+        
+      - name: Terraform plan
+        id: validate
+        run: ${{ inputs.tf_command_plan }}
+        working-directory: ${{ inputs.command_wrk_dir }}
             
   jobs_checkov:
     name: Checkov workflow
