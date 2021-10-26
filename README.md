@@ -11,7 +11,7 @@ Terraform workflow to be reused in your project, with commom Terraform steps and
 
 This workflow will setup a CI with the following jobs (and steps):
 
-### `jobs_teraform`
+### `jobs_terraform`
 A job triggered at all `push` events with the steps:
 * checkout the code
 * setup Terraform
@@ -23,7 +23,7 @@ A job triggered at all `push` events with the steps:
 A job triggered at all `pull_request` events with the steps:
 * checkout the code
 * setup tfsec
-* run checkcov static analysis
+* run tfsec static analysis
 * If a vulnerability is found, create a comment in PR
 
 
